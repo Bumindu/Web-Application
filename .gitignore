@@ -32,4 +32,4 @@ yarn-error.log*
 
 # Logs
 logs
-*.log 
+*.log server/firebase-service-account.json 
