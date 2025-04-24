@@ -1,0 +1,64 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        
+    - name: Install dependencies
+      run: npm ci
+        
+    - name: Build
+      run: npm run build
+      
+    - name: Deploy to Staging
+      run: |
+        # Add your deployment commands here
+        echo "Deploying to staging environment"
+      env:
+        DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+
+  deploy-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    environment: production
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        
+    - name: Install dependencies
+      run: npm ci
+        
+    - name: Build
+      run: npm run build
+      
+    - name: Deploy to Production
+      run: |
+        # Add your deployment commands here
+        echo "Deploying to production environment"
+      env:
+        DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+
+    - name: Verify Deployment
+      run: |
+        # Add health check or smoke test commands
+        echo "Verifying deployment" 
