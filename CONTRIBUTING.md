@@ -22,7 +22,7 @@ Before submitting a PR:
 - Run tests locally
 - Ensure no new warnings or errors appear
 
-## 🧼 Clean Code
+## 🧼 Clean Code..
 
 - Remove unused code
 - Add comments where necessary
