@@ -1,6 +1,8 @@
 # Dependencies
 node_modules/
-/.pnp
+client/node_modules/
+client/node_modules/.cache/
+.pnp
 .pnp.js
 
 # Testing
@@ -32,6 +34,7 @@ yarn-error.log*
 # Cache
 .cache/
 .npm/
-.eslintcache 
-"node_modules/" 
-".cache/" 
+.eslintcache
+
+# Large files
+*.pack
