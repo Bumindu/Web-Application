@@ -33,3 +33,5 @@ yarn-error.log*
 .cache/
 .npm/
 .eslintcache 
+"node_modules/" 
+".cache/" 
