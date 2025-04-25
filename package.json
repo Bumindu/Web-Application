@@ -6,11 +6,15 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm start",
     "client": "cd client && npm start",
-    "install-all": "npm install && cd client && npm install && cd ../server && npm install"
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "build": "cd client && npm run build && cd ../server && echo 'Server build not required'",
+    "lint": "cd client && npm run lint",
+    "test": "cd client && npm run test",
+    "test:integration": "echo 'No integration tests configured'"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2"
   }
-} 
+}

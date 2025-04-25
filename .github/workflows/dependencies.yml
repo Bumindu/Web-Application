@@ -8,7 +8,7 @@ on:
 jobs:
   dependencies:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
 
@@ -16,15 +16,21 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '18.x'
-        
+
     - name: Check for updates
       uses: renovatebot/github-action@v39.1.1
       with:
         configurationFile: renovate.json
         token: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Install dependencies
+      run: npm run install-all
+
     - name: Run npm audit
-      run: npm audit
+      run: |
+        npm audit
+        cd client && npm audit
+        cd ../server && npm audit
 
     - name: Create Issue on Security Vulnerability
       if: failure()
@@ -36,4 +42,4 @@ jobs:
             repo: context.repo.repo,
             title: 'Security Vulnerabilities Detected',
             body: 'npm audit has detected security vulnerabilities. Please review the workflow logs.'
-          }) 
+          })

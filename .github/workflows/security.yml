@@ -11,15 +11,23 @@ on:
 jobs:
   security-scan:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
+
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+
+    - name: Install dependencies
+      run: npm run install-all
 
     - name: SAST - CodeQL Analysis
       uses: github/codeql-action/init@v2
       with:
         languages: javascript
-        
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 
@@ -34,7 +42,7 @@ jobs:
       uses: zaproxy/action-full-scan@v0.4.0
       with:
         target: 'http://staging-url-here'  # Replace with your staging URL
-        
+
     - name: Upload Security Report
       if: always()
       uses: actions/upload-artifact@v3
@@ -42,4 +50,4 @@ jobs:
         name: security-report
         path: |
           results.sarif
-          zap-report/ 
+          zap-report/

@@ -15,25 +15,25 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    
+
     - name: Install dependencies
-      run: npm ci
-    
+      run: npm run install-all
+
     - name: Run linter
       run: npm run lint
-    
+
     - name: Run unit tests
       run: npm run test
-      
+
     - name: Run integration tests
       run: npm run test:integration
-      
+
     - name: Build project
       run: npm run build
 
@@ -48,10 +48,10 @@ jobs:
   code-quality:
     needs: build-and-test
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
@@ -61,4 +61,4 @@ jobs:
     - name: Security scan
       uses: snyk/actions/node@master
       env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
