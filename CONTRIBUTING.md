@@ -2,7 +2,7 @@
 
 Thank you for considering contributing to the Alexa Chatbot project to help make this project better for everyone.
 
-## 📋 Table of Contents
+## 📋 Table of Contents.
 
 - [Code of Conduct](#code-of-conduct)
 - [Getting Started](#getting-started)
